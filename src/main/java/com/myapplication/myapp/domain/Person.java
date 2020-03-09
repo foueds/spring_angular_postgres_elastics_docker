@@ -1,5 +1,6 @@
 package com.myapplication.myapp.domain;
 
+import io.swagger.annotations.ApiModel;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -8,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "person")
+@ApiModel(description = "All details about the Person. ")
 public class Person {
 
     @Id
@@ -18,19 +21,20 @@ public class Person {
     @Column
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String firstName;
 
-    @Column
+    @Column(nullable = false)
     private String lastName;
 
-    @Column
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date birthDate;
 
-    @Column
+    @Column(nullable = false)
     private String mailAdress;
 
-    @Column
+    @Column(nullable = false)
     private long phoneNumber;
 
 
@@ -94,5 +98,17 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, birthDate, mailAdress, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+              "id=" + id +
+              ", firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", birthDate=" + birthDate +
+              ", mailAdress='" + mailAdress + '\'' +
+              ", phoneNumber=" + phoneNumber +
+              '}';
     }
 }
