@@ -37,8 +37,15 @@ public class Person {
     @Column(nullable = false)
     private long phoneNumber;
 
+  public Person(String firstName, String lastName, Date birthDate, String mailAdress, long phoneNumber) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthDate = birthDate;
+    this.mailAdress = mailAdress;
+    this.phoneNumber = phoneNumber;
+  }
 
-    public String getFirstName() {
+  public String getFirstName() {
         return firstName;
     }
 
