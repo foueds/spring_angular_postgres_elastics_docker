@@ -13,7 +13,7 @@ public class PersonEsServiceImpl implements PersonEsService {
   private PersonEsRepository personEsRepository;
 
 
-  public PersonEsServiceImpl(PersonEsRepository personEsRepository){
+  public PersonEsServiceImpl(PersonEsRepository personEsRepository) {
     this.personEsRepository = personEsRepository;
   }
 
@@ -33,12 +33,17 @@ public class PersonEsServiceImpl implements PersonEsService {
   }
 
   @Override
-  public Optional<PersonEs> findById(long id){
+  public Optional<PersonEs> findById(long id) {
     return personEsRepository.findById(id);
   }
 
   @Override
   public Page<PersonEs> findByFirstName(String name, Pageable pageable) {
     return personEsRepository.findByFirstName(name, pageable);
+  }
+
+  @Override
+  public void deleteById(long id) {
+    personEsRepository.deleteById(id);
   }
 }

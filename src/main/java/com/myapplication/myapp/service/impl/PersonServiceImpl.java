@@ -24,7 +24,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person createPerson(Person person){
+    public Person save(Person person){
       return personRepository.save(person);
     }
+
+  @Override
+  public void deleteById(long id) {
+    personRepository.deleteById(id);
+  }
 }

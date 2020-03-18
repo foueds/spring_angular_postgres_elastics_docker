@@ -16,4 +16,6 @@ public interface PersonEsService {
   Optional<PersonEs> findById(long id);
 
   Page<PersonEs> findByFirstName(String name, Pageable pageable);
+
+  void deleteById(long id);
 }
