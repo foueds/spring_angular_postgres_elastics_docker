@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "springAngularPostgresElasticsDaocker": {
+    "springAngularPostgresElasticsdocker": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/springAngularPostgresElasticsDaocker",
+            "outputPath": "dist/springAngularPostgresElasticsdocker",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "springAngularPostgresElasticsDaocker:build"
+            "browserTarget": "springAngularPostgresElasticsdocker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "springAngularPostgresElasticsDaocker:build:production"
+              "browserTarget": "springAngularPostgresElasticsdocker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "springAngularPostgresElasticsDaocker:build"
+            "browserTarget": "springAngularPostgresElasticsdocker:build"
           }
         },
         "test": {
@@ -102,7 +102,7 @@
         }
       }
     },
-    "springAngularPostgresElasticsDaocker-e2e": {
+    "springAngularPostgresElasticsdocker-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -111,11 +111,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "springAngularPostgresElasticsDaocker:serve"
+            "devServerTarget": "springAngularPostgresElasticsdocker:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "springAngularPostgresElasticsDaocker:serve:production"
+              "devServerTarget": "springAngularPostgresElasticsdocker:serve:production"
             }
           }
         },
@@ -131,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "springAngularPostgresElasticsDaocker"
+  "defaultProject": "springAngularPostgresElasticsdocker"
 }
