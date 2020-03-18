@@ -22,4 +22,9 @@ public class PersonServiceImpl implements PersonService {
     public Optional<Person> searchPersonByid(long id) {
         return personRepository.findById(id);
     }
+
+    @Override
+    public Person createPerson(Person person){
+      return personRepository.save(person);
+    }
 }

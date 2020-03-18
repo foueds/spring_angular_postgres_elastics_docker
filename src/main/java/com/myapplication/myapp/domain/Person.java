@@ -35,14 +35,25 @@ public class Person {
     private String mailAdress;
 
     @Column(nullable = false)
-    private long phoneNumber;
+    private String phoneNumber;
 
-  public Person(String firstName, String lastName, Date birthDate, String mailAdress, long phoneNumber) {
+  public Person() {
+  }
+
+  public Person(String firstName, String lastName, Date birthDate, String mailAdress, String phoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
     this.mailAdress = mailAdress;
     this.phoneNumber = phoneNumber;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getFirstName() {
@@ -77,11 +88,11 @@ public class Person {
         this.mailAdress = mailAdress;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -10,7 +10,7 @@ public final class PersonBuilder {
   private String lastName;
   private Date birthDate;
   private String mailAdress;
-  private long phoneNumber;
+  private String phoneNumber;
 
   private PersonBuilder() {
   }
@@ -44,7 +44,7 @@ public final class PersonBuilder {
     return this;
   }
 
-  public PersonBuilder withPhoneNumber(long phoneNumber) {
+  public PersonBuilder withPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
   }

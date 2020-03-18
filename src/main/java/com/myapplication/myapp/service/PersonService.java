@@ -5,5 +5,7 @@ import java.util.Optional;
 
 public interface PersonService {
 
-    public Optional<Person> searchPersonByid(long id);
+  Optional<Person> searchPersonByid(long id);
+
+  Person createPerson(Person person);
 }

@@ -36,7 +36,7 @@ public class PersonServiceTest {
       .withFirstName("foued")
       .withLastName("sliti")
       .withMailAdress("foued.sliti@gmail.com")
-      .withPhoneNumber(0751501601)
+      .withPhoneNumber("0751501601")
       .build();
 
     //When
