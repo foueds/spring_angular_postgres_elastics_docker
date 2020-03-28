@@ -1,5 +1,6 @@
 package com.myapplication.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import java.util.Date;
 import java.util.Objects;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -28,11 +31,11 @@ public class Person {
     private String lastName;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(nullable = false)
-    private String mailAdress;
+    private String mailAddress;
 
     @Column(nullable = false)
     private String phoneNumber;
@@ -40,11 +43,11 @@ public class Person {
   public Person() {
   }
 
-  public Person(String firstName, String lastName, Date birthDate, String mailAdress, String phoneNumber) {
+  public Person(String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
-    this.mailAdress = mailAdress;
+    this.mailAddress = mailAddress;
     this.phoneNumber = phoneNumber;
   }
 
@@ -80,12 +83,12 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public String getMailAdress() {
-        return mailAdress;
+    public String getmailAddress() {
+        return mailAddress;
     }
 
-    public void setMailAdress(String mailAdress) {
-        this.mailAdress = mailAdress;
+    public void setmailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     public String getPhoneNumber() {
@@ -110,12 +113,12 @@ public class Person {
               Objects.equals(firstName, person.firstName) &&
               Objects.equals(lastName, person.lastName) &&
               Objects.equals(birthDate, person.birthDate) &&
-              Objects.equals(mailAdress, person.mailAdress);
+              Objects.equals(mailAddress, person.mailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, birthDate, mailAdress, phoneNumber);
+        return Objects.hash(id, firstName, lastName, birthDate, mailAddress, phoneNumber);
     }
 
     @Override
@@ -125,7 +128,7 @@ public class Person {
               ", firstName='" + firstName + '\'' +
               ", lastName='" + lastName + '\'' +
               ", birthDate=" + birthDate +
-              ", mailAdress='" + mailAdress + '\'' +
+              ", mailAddress='" + mailAddress + '\'' +
               ", phoneNumber=" + phoneNumber +
               '}';
     }

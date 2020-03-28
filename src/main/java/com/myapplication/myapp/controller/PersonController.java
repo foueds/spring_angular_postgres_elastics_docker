@@ -3,14 +3,16 @@ package com.myapplication.myapp.controller;
 import com.myapplication.myapp.config.ElasticSearchConfig;
 import com.myapplication.myapp.domain.Person;
 import com.myapplication.myapp.domain.es.PersonEs;
+import com.myapplication.myapp.dto.PersonDto;
 import com.myapplication.myapp.service.PersonService;
 import com.myapplication.myapp.service.es.PersonEsService;
 import com.myapplication.myapp.service.mapper.PersonMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.elasticsearch.ResourceAlreadyExistsException;
 import org.elasticsearch.ResourceNotFoundException;
@@ -19,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,36 +49,43 @@ public class PersonController {
     this.personMapper = personMapper;
   }
 
-  @ApiOperation(value = "View a list of available employees", response = Person.class)
+  @ApiOperation(value = "View a list of available person", response = Person.class)
   @GetMapping("/person/{id}")
-  public Person findPersonById(
-    @ApiParam(value = "Return person details by id", required = true) @PathVariable(value = "id") Long personId)
+  public PersonDto findPersonById(@ApiParam(value = "Return person details by id", required = true) @PathVariable(value = "id") Long personId)
     throws ResourceNotFoundException {
     PersonEs personEs = personEsService.findById(personId)
       .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id :: " + personId));
-    return personMapper.PersonEsToPerson(personEs);
+    return personMapper.convertPersonEsToPersonDto(personEs);
+
+  }
+
+  @ApiOperation(value = "View a list of all persons", response = Person.class)
+  @GetMapping("/person")
+  public List<PersonDto> getListOfAllPerson() {
+    List<PersonDto> persons = new ArrayList<>();
+    personEsService.findAll().forEach(personEs -> persons.add(personMapper.convertPersonEsToPersonDto(personEs)));
+    return persons;
   }
 
   @ApiOperation(value = "Return person details by name", response = Person.class)
   @GetMapping("/person/firstname/{firstName}")
-  public Person findByFirstName(@PathVariable(value = "firstName") String firstName, @RequestParam(required = false) Pageable pageable)
+  public PersonDto findByFirstName(@PathVariable(value = "firstName") String firstName, @RequestParam(required = false) Pageable pageable)
     throws ResourceNotFoundException {
     pageable = pageable != null ? pageable : PageRequest.of(0, 10);
     PersonEs person = personEsService.findByFirstName(firstName, pageable).stream().findFirst()
       .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id :: " + firstName));
-    return personMapper.PersonEsToPerson(person);
+    return personMapper.convertPersonEsToPersonDto(person);
   }
 
   @ApiOperation(value = "Create new person", response = Person.class)
   @PostMapping("/person")
   @ResponseStatus(HttpStatus.CREATED)
   @Transactional
-  public ResponseEntity<Person> createPerson(@RequestBody Person person) throws ResourceAlreadyExistsException, URISyntaxException {
-    Person personResult = personService.save(person);
-    PersonEs personEsResult = personMapper.PersonToPersonEs(personResult);
+  public PersonDto createPerson(@RequestBody PersonDto person) throws ResourceAlreadyExistsException, URISyntaxException {
+    Person personResult = personService.save(personMapper.convertToPersonEntity(person));
+    PersonEs personEsResult = personMapper.convertPersonToPersonEs(personResult);
     personEsService.save(personEsResult);
-    return ResponseEntity.created(new URI("/api/person/" + personResult.getId()))
-      .body(personResult);
+    return personMapper.convertPersonEsToPersonDto(personEsResult);
   }
 
   @ApiOperation(value = "delete person by id", response = Person.class)
@@ -96,16 +104,15 @@ public class PersonController {
   @ApiOperation(value = "update person with new details", response = Person.class)
   @PutMapping("/person/")
   @Transactional
-  public ResponseEntity<Person> updatePerson(@RequestBody Person person) throws ResourceNotFoundException {
+  public PersonDto updatePerson(@RequestBody PersonDto person) throws ResourceNotFoundException {
     logger.debug("REST request to update Employee : {}", person);
     if (person.getId() == null) {
       throw new ResourceNotFoundException("Invalid id");
     }
-    Person result = personService.save(person);
-    PersonEs personEsResult = personMapper.PersonToPersonEs(result);
+    Person result = personService.save(personMapper.convertToPersonEntity(person));
+    PersonEs personEsResult = personMapper.convertPersonToPersonEs(result);
     personEsService.save(personEsResult);
-    return ResponseEntity.ok()
-      .body(result);
+    return personMapper.convertPersonEsToPersonDto(personEsResult);
   }
 
 }

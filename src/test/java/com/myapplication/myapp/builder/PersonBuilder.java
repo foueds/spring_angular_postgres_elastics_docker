@@ -9,7 +9,7 @@ public final class PersonBuilder {
   private String firstName;
   private String lastName;
   private Date birthDate;
-  private String mailAdress;
+  private String mailAddress;
   private String phoneNumber;
 
   private PersonBuilder() {
@@ -39,8 +39,8 @@ public final class PersonBuilder {
     return this;
   }
 
-  public PersonBuilder withMailAdress(String mailAdress) {
-    this.mailAdress = mailAdress;
+  public PersonBuilder withmailAddress(String mailAddress) {
+    this.mailAddress = mailAddress;
     return this;
   }
 
@@ -50,6 +50,6 @@ public final class PersonBuilder {
   }
 
   public Person build() {
-    return new Person(firstName, lastName, birthDate, mailAdress, phoneNumber);
+    return new Person(firstName, lastName, birthDate, mailAddress, phoneNumber);
   }
 }

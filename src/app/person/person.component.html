@@ -1,0 +1,23 @@
+<div>
+  <label >La liste des personnes:</label>
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <th>first name</th>
+      <th>last name</th>
+      <th>birth date</th>
+      <th>mail address</th>
+      <th>phone number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let person of personsList">
+      <td> {{person.firstName}}</td>
+      <td> {{person.lastName}}</td>
+      <td> {{person.birthDate}}</td>
+      <td> {{person.mailAddress}}</td>
+      <td> {{person.phoneNumber}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

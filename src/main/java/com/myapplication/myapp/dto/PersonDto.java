@@ -1,30 +1,40 @@
-package com.myapplication.myapp.domain.es;
+package com.myapplication.myapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
-import javax.persistence.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "users", type = "person")
-public class PersonEs {
+public class PersonDto {
 
-  @Id
-  private long id;
+  private Long id;
 
   private String firstName;
 
   private String lastName;
 
+  @JsonFormat(pattern="yyyy-MM-dd")
   private Date birthDate;
 
   private String mailAddress;
 
   private String phoneNumber;
 
-  public long getId() {
+  public PersonDto() {
+  }
+
+  public PersonDto(long id, String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthDate = birthDate;
+    this.mailAddress = mailAddress;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -66,17 +76,5 @@ public class PersonEs {
 
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
-  }
-
-  @Override
-  public String toString() {
-    return "PersonEs{" +
-      "id=" + id +
-      ", firstName='" + firstName + '\'' +
-      ", lastName='" + lastName + '\'' +
-      ", birthDate=" + birthDate +
-      ", mailAddress='" + mailAddress + '\'' +
-      ", phoneNumber=" + phoneNumber +
-      '}';
   }
 }
