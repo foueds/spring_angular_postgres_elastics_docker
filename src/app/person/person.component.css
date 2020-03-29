@@ -32,6 +32,10 @@
   color:#607D8B;
 }
 
+table {
+  width: 100%;
+}
+
 .persons .badge {
   display: inline-block;
   font-size: small;

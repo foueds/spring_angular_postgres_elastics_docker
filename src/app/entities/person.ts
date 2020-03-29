@@ -1,11 +1,11 @@
 export class Person {
 
-  private id: number;
-  private firstName: string;
-  private lastName: string;
-  private birthDate: Date;
-  private mailAddress: string;
-  private phoneNumber: number;
+  public id: number;
+  public firstName: string;
+  public lastName: string;
+  public birthDate: Date;
+  public mailAddress: string;
+  public phoneNumber: number;
 
 
   constructor(id: number, firstName: string, lastName: string, birthDate: Date, mailAddress: string, phoneNumber: number) {

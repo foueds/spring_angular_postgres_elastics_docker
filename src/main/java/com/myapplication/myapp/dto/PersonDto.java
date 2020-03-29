@@ -62,11 +62,11 @@ public class PersonDto {
     this.birthDate = birthDate;
   }
 
-  public String getmailAddress() {
+  public String getMailAddress() {
     return mailAddress;
   }
 
-  public void setmailAddress(String mailAddress) {
+  public void setMailAddress(String mailAddress) {
     this.mailAddress = mailAddress;
   }
 

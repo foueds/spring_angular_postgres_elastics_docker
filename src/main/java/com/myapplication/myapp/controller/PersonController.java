@@ -10,7 +10,6 @@ import com.myapplication.myapp.service.mapper.PersonMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -81,7 +80,7 @@ public class PersonController {
   @PostMapping("/person")
   @ResponseStatus(HttpStatus.CREATED)
   @Transactional
-  public PersonDto createPerson(@RequestBody PersonDto person) throws ResourceAlreadyExistsException, URISyntaxException {
+  public PersonDto createPerson(@RequestBody PersonDto person) throws ResourceAlreadyExistsException{
     Person personResult = personService.save(personMapper.convertToPersonEntity(person));
     PersonEs personEsResult = personMapper.convertPersonToPersonEs(personResult);
     personEsService.save(personEsResult);

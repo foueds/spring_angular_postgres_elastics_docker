@@ -83,15 +83,15 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public String getmailAddress() {
-        return mailAddress;
-    }
+  public String getMailAddress() {
+    return mailAddress;
+  }
 
-    public void setmailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
-    }
+  public void setMailAddress(String mailAddress) {
+    this.mailAddress = mailAddress;
+  }
 
-    public String getPhoneNumber() {
+  public String getPhoneNumber() {
         return phoneNumber;
     }
 
