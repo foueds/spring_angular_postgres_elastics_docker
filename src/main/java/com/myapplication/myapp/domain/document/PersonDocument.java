@@ -1,11 +1,11 @@
-package com.myapplication.myapp.domain.es;
+package com.myapplication.myapp.domain.document;
 
 import java.util.Date;
 import javax.persistence.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "users", type = "person")
-public class PersonEs {
+public class PersonDocument {
 
   @Id
   private long id;
@@ -52,11 +52,11 @@ public class PersonEs {
     this.birthDate = birthDate;
   }
 
-  public String getmailAddress() {
+  public String getMailAddress() {
     return mailAddress;
   }
 
-  public void setmailAddress(String mailAddress) {
+  public void setMailAddress(String mailAddress) {
     this.mailAddress = mailAddress;
   }
 

@@ -22,6 +22,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+##install Mat table module
+ng add @angular/material
+
 ## Postgres using Docker
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=admin postgres
 

@@ -3,7 +3,7 @@ package com.myapplication.myapp.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
-public class PersonDto {
+public class Person {
 
   private Long id;
 
@@ -18,10 +18,10 @@ public class PersonDto {
 
   private String phoneNumber;
 
-  public PersonDto() {
+  public Person() {
   }
 
-  public PersonDto(long id, String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
+  public Person(long id, String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

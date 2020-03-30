@@ -1,6 +1,5 @@
 package com.myapplication.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import java.util.Date;
 import java.util.Objects;
@@ -12,12 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "person")
 @ApiModel(description = "All details about the Person. ")
-public class Person {
+public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,10 +38,10 @@ public class Person {
     @Column(nullable = false)
     private String phoneNumber;
 
-  public Person() {
+  public PersonEntity() {
   }
 
-  public Person(String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
+  public PersonEntity(String firstName, String lastName, Date birthDate, String mailAddress, String phoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -104,16 +102,16 @@ public class Person {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Person)) {
+        if (!(o instanceof PersonEntity)) {
             return false;
         }
-        Person person = (Person) o;
-        return id == person.id &&
-              phoneNumber == person.phoneNumber &&
-              Objects.equals(firstName, person.firstName) &&
-              Objects.equals(lastName, person.lastName) &&
-              Objects.equals(birthDate, person.birthDate) &&
-              Objects.equals(mailAddress, person.mailAddress);
+        PersonEntity personEntity = (PersonEntity) o;
+        return id == personEntity.id &&
+              phoneNumber == personEntity.phoneNumber &&
+              Objects.equals(firstName, personEntity.firstName) &&
+              Objects.equals(lastName, personEntity.lastName) &&
+              Objects.equals(birthDate, personEntity.birthDate) &&
+              Objects.equals(mailAddress, personEntity.mailAddress);
     }
 
     @Override

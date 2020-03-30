@@ -1,31 +1,30 @@
-package com.myapplication.myapp.service.impl;
+package com.myapplication.myapp.service.entity;
 
-import com.myapplication.myapp.domain.Person;
+import com.myapplication.myapp.domain.PersonEntity;
 import com.myapplication.myapp.repository.PersonRepository;
-import com.myapplication.myapp.service.PersonService;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonService {
+public class PersonEntityServiceImpl implements PersonEntityService {
 
     private PersonRepository personRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository){
+    public PersonEntityServiceImpl(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
 
     @Override
-    public Optional<Person> searchPersonByid(long id) {
+    public Optional<PersonEntity> findPersonByid(long id) {
         return personRepository.findById(id);
     }
 
     @Override
-    public Person save(Person person){
-      return personRepository.save(person);
+    public PersonEntity save(PersonEntity personEntity){
+      return personRepository.save(personEntity);
     }
 
   @Override

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import com.myapplication.myapp.builder.PersonBuilder;
-import com.myapplication.myapp.domain.Person;
+import com.myapplication.myapp.domain.PersonEntity;
 import com.myapplication.myapp.repository.PersonRepository;
-import com.myapplication.myapp.service.impl.PersonServiceImpl;
+import com.myapplication.myapp.service.entity.PersonEntityServiceImpl;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,19 +19,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class PersonServiceTest {
+public class PersonEntityServiceTest {
 
   @Mock
   private PersonRepository personRepository;
 
   @InjectMocks
-  private PersonServiceImpl personService;
+  private PersonEntityServiceImpl personService;
 
   @Test
   public void i_get_a_valid_person_when_searching_by_id() {
 
    //Given
-    Person person = PersonBuilder.aPerson()
+    PersonEntity personEntity = PersonBuilder.aPerson()
       .withId(1L)
       .withFirstName("foued")
       .withLastName("sliti")
@@ -40,9 +40,9 @@ public class PersonServiceTest {
       .build();
 
     //When
-    Optional<Person> personOptional = Optional.of(person);
+    Optional<PersonEntity> personOptional = Optional.of(personEntity);
     when(personRepository.findById(1L)).thenReturn(personOptional);
-    Optional<Person> person1 = personService.searchPersonByid(1L);
+    Optional<PersonEntity> person1 = personService.findPersonByid(1L);
 
     //Then
     assertAll(() -> assertEquals(personOptional, person1),

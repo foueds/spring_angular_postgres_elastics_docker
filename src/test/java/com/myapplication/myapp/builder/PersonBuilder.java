@@ -1,6 +1,6 @@
 package com.myapplication.myapp.builder;
 
-import com.myapplication.myapp.domain.Person;
+import com.myapplication.myapp.domain.PersonEntity;
 import java.util.Date;
 
 public final class PersonBuilder {
@@ -49,7 +49,7 @@ public final class PersonBuilder {
     return this;
   }
 
-  public Person build() {
-    return new Person(firstName, lastName, birthDate, mailAddress, phoneNumber);
+  public PersonEntity build() {
+    return new PersonEntity(firstName, lastName, birthDate, mailAddress, phoneNumber);
   }
 }
