@@ -28,6 +28,11 @@ ng add @angular/material
 ## Postgres using Docker
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=admin postgres
 
+##case of port 4200 is already used 
+netstat -a -o -n: khow which process is using port 4200 
+Find the PID of the process that you want to kill.
+Type: taskkill _F -PID XXX
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

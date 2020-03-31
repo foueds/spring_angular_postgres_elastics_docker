@@ -17,12 +17,17 @@
   </div>
   <div class="form-group">
     <label>Mail Address</label>
-    <input type="email" class="form-control" formControlName="email">
+    <input type="email" class="form-control" formControlName="mailAddress">
   </div>
   <div class="form-group">
     <label>Phone Number</label>
     <input type="number" class="form-control" formControlName="phoneNumber">
   </div>
-  <button type="submit" class="btn btn-primary">Save</button>
-  <button (click)="goBack()">Back</button>
+  <div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
 </form>
+<div>
+  <button (click)="goBack()">Back</button>
+</div>
+
