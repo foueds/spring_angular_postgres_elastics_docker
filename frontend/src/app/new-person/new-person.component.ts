@@ -20,7 +20,6 @@ export class NewPersonComponent implements OnInit {
 
   ngOnInit() {
     this.addPersonForm = new FormGroup({
-      id: new FormControl(),
       firstName: new FormControl(),
       lastName: new FormControl(),
       birthDate: new FormControl(),
@@ -31,14 +30,7 @@ export class NewPersonComponent implements OnInit {
 
 
   addPerson(): void {
-    let id = this.addPersonForm.get('id').value;
-    let firstName = this.addPersonForm.get('firstName').value;
-    let lastName = this.addPersonForm.get('lastName').value;
-    let birthDate = this.addPersonForm.get('birthDate').value;
-    let mailAddress = this.addPersonForm.get('mailAddress').value;
-    let phoneNumber = this.addPersonForm.get('phoneNumber').value;
-    this.newPerson = new Person(id, firstName, lastName, birthDate, mailAddress, phoneNumber);
-    this.personService.addPerson(this.newPerson).subscribe();
+    console.log(`la personne ${this.newPerson} est crée`);
   }
 
   goBack(): void {

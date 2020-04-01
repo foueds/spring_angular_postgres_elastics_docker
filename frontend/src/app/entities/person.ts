@@ -8,8 +8,7 @@ export class Person {
   public phoneNumber: number;
 
 
-  constructor(id: number, firstName: string, lastName: string, birthDate: Date, mailAddress: string, phoneNumber: number) {
-    this.id = id;
+  constructor(firstName: string, lastName: string, birthDate: Date, mailAddress: string, phoneNumber: number) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;

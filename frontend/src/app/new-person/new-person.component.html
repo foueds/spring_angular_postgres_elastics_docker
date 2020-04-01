@@ -1,33 +1,31 @@
-<form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
-  <div class="form-group">
-    <label>Id</label>
-    <input type="text" class="form-control" formControlName="id">
-  </div>
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" formControlName="firstName">
-  </div>
-  <div class="form-group">
-    <label>Last Name</label>
-    <input type="text" class="form-control" formControlName="lastName">
-  </div>
-  <div class="form-group">
-    <label>Birth Date </label>
-    <input type="date" class="form-control" formControlName="birthDate">
-  </div>
-  <div class="form-group">
-    <label>Mail Address</label>
-    <input type="email" class="form-control" formControlName="mailAddress">
-  </div>
-  <div class="form-group">
-    <label>Phone Number</label>
-    <input type="number" class="form-control" formControlName="phoneNumber">
-  </div>
-  <div>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </div>
-</form>
-<div>
-  <button (click)="goBack()">Back</button>
+<div class="container">
+  <h1>Contact Form</h1>
+  <form #contactForm="ngForm" (ngSubmit)="addPerson()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="newPerson.firstName" #firstName="ngModel">
+      <div [hidden]="firstName.valid || firstName.pristine"
+           class="alert alert-danger">
+        First Name is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="newPerson.lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" class="form-control" id="birthDate" [(ngModel)]="newPerson.birthDate" required>
+    </div>
+    <div class="form-group">
+      <label for="mailAddress">Mail Address</label>
+      <input type="email" class="form-control" id="mailAddress" [(ngModel)]="newPerson.mailAddress" required>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newPerson.phoneNumber" required>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!contactForm.form.valid">Submit</button>
+    <button type="button" class="btn btn-default btn-back-position" (click)="goBack()">Back</button>
+  </form>
 </div>
-
