@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from "@angular/material";
+import { Router } from '@angular/router';
 import { Person } from "../entities/person";
 import { PersonService } from "../service/person.service";
 
@@ -10,23 +11,16 @@ import { PersonService } from "../service/person.service";
 })
 export class PersonComponent implements OnInit {
 
-  personSelected: Person;
   personsList: Array<Person>;
   columnsToDisplay = ['firstName', 'lastName', 'birthDate', 'mailAddress', 'phoneNumber', 'actions'];
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor(private personService: PersonService) {
+  constructor(private personService: PersonService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.getAllPersons();
-  }
-
-  private getPersonById() {
-    this.personService.getPersonById(8).subscribe(
-      result => this.personSelected = result
-    )
   }
 
   getAllPersons(): void {
@@ -36,12 +30,17 @@ export class PersonComponent implements OnInit {
   }
 
   editPerson(personId: number): void {
-    //todo
+    this.router.navigate([`editPerson/${personId}`]).then(
+      () => {
+        this.getAllPersons();
+        this.table.renderRows()
+      }
+    );
   }
 
   deletePerson(personId: number): void {
     this.personService.deletePerson(personId).subscribe(
-      result => {
+      () => {
         this.personsList = this.personsList.filter((person: Person) => person.id != personId);
         this.table.renderRows();
       }

@@ -27,8 +27,8 @@ export class PersonService {
     return this.invokerService.http.get(this.url_api);
   }
 
-  public getPersonById(id: number): Observable<any> {
-    return this.invokerService.http.get(this.url_api + id);
+  public getPersonById(id: number): Observable<Person> {
+    return this.invokerService.http.get<Person>(this.url_api + id);
   }
 
   public deletePerson(id: number): Observable<Person> {
