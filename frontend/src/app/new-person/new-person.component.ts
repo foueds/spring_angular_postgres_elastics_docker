@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Person } from "../entities/person";
 import { PersonService } from "../service/person.service";
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-person',
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./new-person.component.css']
 })
 export class NewPersonComponent implements OnInit {
+
   newPerson: Person;
   isNewPerson: boolean;
 
@@ -28,11 +29,8 @@ export class NewPersonComponent implements OnInit {
     }
   }
 
-
   addPerson(): void {
-    this.personService.addPerson(this.newPerson).subscribe();
-    console.log(`New person added:  ${this.newPerson} `);
-    this.goBack();
+    console.log(`la personne ${this.newPerson} est crée`);
   }
 
   goBack(): void {
