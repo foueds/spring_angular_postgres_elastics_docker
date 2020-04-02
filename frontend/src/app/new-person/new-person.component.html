@@ -3,7 +3,7 @@
   <form #contactForm="ngForm" (ngSubmit)="addPerson()">
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" required [(ngModel)]="newPerson.firstName" #firstName="ngModel">
+      <input type="text" class="form-control" id="firstName" name="firstName" required [(ngModel)]="newPerson.firstName" #firstName="ngModel">
       <div [hidden]="firstName.valid || firstName.pristine"
            class="alert alert-danger">
         First Name is required
@@ -11,19 +11,36 @@
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="newPerson.lastName" required>
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newPerson.lastName" required #lastName="ngModel">
+      <div [hidden]="lastName.valid || lastName.pristine"
+           class="alert alert-danger">
+        Last Name is required
+      </div>
     </div>
     <div class="form-group">
       <label for="birthDate">Birth Date</label>
-      <input type="date" class="form-control" id="birthDate" [(ngModel)]="newPerson.birthDate" required>
+      <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="newPerson.birthDate" required #birthDate="ngModel">
+      <div [hidden]="birthDate.valid || birthDate.pristine"
+           class="alert alert-danger">
+        Birth Date is required
+      </div>
     </div>
     <div class="form-group">
       <label for="mailAddress">Mail Address</label>
-      <input type="email" class="form-control" id="mailAddress" [(ngModel)]="newPerson.mailAddress" required>
+      <input type="email" class="form-control" id="mailAddress" name="mailAddress" [(ngModel)]="newPerson.mailAddress" required #mailAddress="ngModel"
+             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+      <div [hidden]="mailAddress.valid || mailAddress.pristine" class="alert alert-danger">
+        <p *ngIf="mailAddress.errors?.required">Mail Address is required</p>
+        <p *ngIf="mailAddress.errors?.pattern">Mail Address is not valid Email</p>
+      </div>
     </div>
     <div class="form-group">
       <label for="phoneNumber">Phone Number</label>
-      <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newPerson.phoneNumber" required>
+      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="newPerson.phoneNumber" required #phoneNumber="ngModel">
+      <div [hidden]="phoneNumber.valid || phoneNumber.pristine"
+           class="alert alert-danger">
+        Phone Number is required
+      </div>
     </div>
     <button type="submit" class="btn btn-success" [disabled]="!contactForm.form.valid">Submit</button>
     <button type="button" class="btn btn-default btn-back-position" (click)="goBack()">Back</button>

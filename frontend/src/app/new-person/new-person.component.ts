@@ -1,8 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
 import { Person } from "../entities/person";
 import { PersonService } from "../service/person.service";
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-person',
@@ -10,27 +9,20 @@ import { Location } from '@angular/common';
   styleUrls: ['./new-person.component.css']
 })
 export class NewPersonComponent implements OnInit {
-
-  addPersonForm: FormGroup;
-
   newPerson: Person;
 
   constructor(private personService: PersonService, private location: Location) {
   }
 
   ngOnInit() {
-    this.addPersonForm = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      birthDate: new FormControl(),
-      mailAddress: new FormControl(),
-      phoneNumber: new FormControl(),
-    });
+    this.newPerson = new Person('', '', new Date(), '', 0);
   }
 
 
   addPerson(): void {
-    console.log(`la personne ${this.newPerson} est crée`);
+    this.personService.addPerson(this.newPerson).subscribe();
+    console.log(`New person added:  ${this.newPerson} `);
+    this.goBack();
   }
 
   goBack(): void {
