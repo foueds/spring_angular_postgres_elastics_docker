@@ -2,6 +2,7 @@ package com.myapplication.myapp.service.document;
 
 import com.myapplication.myapp.domain.document.PersonDocument;
 import com.myapplication.myapp.repository.document.PersonEsRepository;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,11 @@ public class PersonDocumentServiceImpl implements PersonDocumentService {
   @Override
   public PersonDocument save(PersonDocument personDocument) {
     return personEsRepository.save(personDocument);
+  }
+
+  @Override
+  public List<PersonDocument> importPersons(List<PersonDocument> personDocuments) {
+    return (List<PersonDocument>) personEsRepository.saveAll(personDocuments);
   }
 
   @Override

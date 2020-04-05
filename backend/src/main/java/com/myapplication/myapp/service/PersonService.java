@@ -1,6 +1,5 @@
 package com.myapplication.myapp.service;
 
-import com.myapplication.myapp.controller.PersonController;
 import com.myapplication.myapp.domain.PersonEntity;
 import com.myapplication.myapp.domain.document.PersonDocument;
 import com.myapplication.myapp.dto.Person;
@@ -35,8 +34,14 @@ public class PersonService {
     PersonMapper personMapper = new PersonMapper();
     PersonEntity personEntity = personEntityService.save(personMapper.convertDtoToEntity(personDto));
     personDocumentService.save(personMapper.convertEntityToDocument(personEntity));
-
     return personDto;
+  }
+
+  public List<Person> importPersons(List<Person> persons) {
+    PersonMapper personMapper = new PersonMapper();
+    List<PersonEntity> personEntities = personEntityService.importPersons(personMapper.convertDtoListToEntities(persons));
+    personDocumentService.importPersons(personMapper.convertEntitiesToDocuments(personEntities));
+    return persons;
   }
 
   public List<Person> getAllPersonList() {

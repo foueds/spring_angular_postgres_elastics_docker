@@ -3,6 +3,8 @@ package com.myapplication.myapp.utils;
 import com.myapplication.myapp.domain.PersonEntity;
 import com.myapplication.myapp.domain.document.PersonDocument;
 import com.myapplication.myapp.dto.Person;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PersonMapper extends AbstractObjectMapper {
@@ -32,4 +34,15 @@ public class PersonMapper extends AbstractObjectMapper {
     return convertTo(person, PersonDocument.class);
   }
 
+  public List<PersonEntity> convertDtoListToEntities(List<Person> personList) {
+    List<PersonEntity> personEntities = new ArrayList<>();
+    personList.forEach(person -> personEntities.add(convertTo(person, PersonEntity.class)));
+    return personEntities;
+  }
+
+  public List<PersonDocument> convertEntitiesToDocuments(List<PersonEntity> personList) {
+    List<PersonDocument> personEntities = new ArrayList<>();
+    personList.forEach(person -> personEntities.add(convertTo(person, PersonDocument.class)));
+    return personEntities;
+  }
 }

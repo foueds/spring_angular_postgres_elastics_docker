@@ -1,8 +1,9 @@
-import { DatePipe, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from "../entities/person";
 import { PersonService } from "../service/person.service";
+import { UtilsService } from "../service/utils.service";
 
 @Component({
   selector: 'app-new-person',
@@ -14,7 +15,7 @@ export class NewPersonComponent implements OnInit {
   newPerson: Person;
   isNewPerson: boolean;
 
-  constructor(private personService: PersonService, private location: Location, private route: ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private personService: PersonService, private location: Location, private route: ActivatedRoute, private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -33,13 +34,9 @@ export class NewPersonComponent implements OnInit {
     this.personService.addPerson(this.newPerson).subscribe(
       person => {
         console.log(`New person added:  ${person} `);
-        this.goBack()
+        this.utils.goBack()
       }
     );
-
   }
 
-  goBack(): void {
-    this.location.back();
-  }
 }

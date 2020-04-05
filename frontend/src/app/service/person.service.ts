@@ -48,6 +48,12 @@ export class PersonService {
     );
   }
 
+  public importPersons(persons: Array<Person>): Observable<Array<Person>> {
+    return this.invokerService.http.post<Array<Person>>(this.url_api+ "/importpersons", persons, this.httpOptions)
+    .pipe(
+      catchError(this.handleError<Array<Person>>('savePersonLists'))
+    );
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

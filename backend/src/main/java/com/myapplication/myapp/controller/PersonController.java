@@ -63,6 +63,13 @@ public class PersonController {
     return personService.saveAll(person);
   }
 
+  @ApiOperation(value = "Import list of persons", response = PersonEntity.class)
+  @PostMapping("/person/importpersons")
+  @ResponseStatus(HttpStatus.CREATED)
+  public List<Person> importPersons(@RequestBody List<Person> persons) throws ResourceAlreadyExistsException {
+    return personService.importPersons(persons);
+  }
+
   @ApiOperation(value = "delete person by id", response = PersonEntity.class)
   @DeleteMapping("/person/{id}")
   @ResponseStatus(HttpStatus.OK)
