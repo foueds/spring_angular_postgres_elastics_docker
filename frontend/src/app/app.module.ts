@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { NewPersonComponent } from './new-person/new-person.component';
 import { PersonComponent } from './person/person.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { PersonComponent } from './person/person.component';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

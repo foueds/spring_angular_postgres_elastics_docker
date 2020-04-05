@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSidenav, MatTable } from "@angular/material";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,12 +10,19 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent {
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
+  .pipe(
+    map(result => result.matches)
+  );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+  }
+
+  ontoggle() {
+    this.sidenav.toggle();
+  }
+
 
 }

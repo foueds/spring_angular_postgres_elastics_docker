@@ -19,7 +19,8 @@
     </div>
     <div class="form-group">
       <label for="birthDate">Birth Date</label>
-      <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="newPerson.birthDate" required #birthDate="ngModel">
+      <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="newPerson.birthDate"
+             required #birthDate="ngModel">
       <div [hidden]="birthDate.valid || birthDate.pristine"
            class="alert alert-danger">
         Birth Date is required
@@ -28,7 +29,7 @@
     <div class="form-group">
       <label for="mailAddress">Mail Address</label>
       <input type="email" class="form-control" id="mailAddress" name="mailAddress" [(ngModel)]="newPerson.mailAddress" required #mailAddress="ngModel"
-             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+             pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
       <div [hidden]="mailAddress.valid || mailAddress.pristine" class="alert alert-danger">
         <p *ngIf="mailAddress.errors?.required">Mail Address is required</p>
         <p *ngIf="mailAddress.errors?.pattern">Mail Address is not valid Email</p>
