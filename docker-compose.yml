@@ -31,8 +31,19 @@ services:
         PGADMIN_DEFAULT_PASSWORD: "admin"
       ports:
         - "5050:80"
-
-
+      volumes:
+        - ./pgadmin-data:/var/lib/pgadmin
+  jenkins:
+    image: jenkinsci/blueocean
+    user: "root"
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/home
+    ports:
+      - "8085:8080"
+    links:
+      - "postgres:database"
 
 
 
