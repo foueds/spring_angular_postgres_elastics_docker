@@ -5,7 +5,6 @@ pipeline {
             image 'maven:3-alpine' 
             args '-v /root/.m2:/root/.m2' 
         }
-      dockerfile true
     }
     stages {
         stage('Build') { 
@@ -14,7 +13,10 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
+            agent {
+               dockerfile true
+            }
+            $steps {
                 sh 'mvn test'
             }
             post {
