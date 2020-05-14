@@ -13,6 +13,9 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+            dockerfile true 
+            }
             steps {
                 sh 'mvn test'
             }
