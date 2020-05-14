@@ -7,10 +7,10 @@ pipeline {
         }
     }
     stages {
-      agent {
-            dockerfile true
-          }
         stage('Build') { 
+            agent {
+                dockerfile true
+            }
             steps {
                 sh 'mvn -B -DskipTests clean package' 
             }
