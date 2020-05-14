@@ -1,1 +1,29 @@
-docker run --name some-postgres -e POSTGRES_PASSWORD=admin -p 5432:5432 -v ./postgres-data:/var/lib/postgresql/data -d postgres:12.2
+
+pipeline {
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
+        docker {
+            dockerfile true
+        }
+    }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
