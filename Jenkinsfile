@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn clean install -DskipTests'
             }
         }
         stage('Test') {
@@ -17,12 +17,7 @@ pipeline {
             dockerfile true 
             }
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                sh 'mvn clean test'
             }
         }
     }
