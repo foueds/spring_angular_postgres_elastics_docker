@@ -1,8 +1,11 @@
 
-
+###run docker
 docker-compose up -d
-
+### stop docker
 docker-compose down -v
+
+##see container up 
+docker ps
 
 ### pgAdmin4:
 http://127.0.0.1:5050/
