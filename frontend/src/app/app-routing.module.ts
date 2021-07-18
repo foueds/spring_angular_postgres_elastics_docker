@@ -1,17 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { ImportPersonsComponent } from "./import-persons/import-persons.component";
-import { NewPersonComponent } from "./new-person/new-person.component";
-import { PersonComponent } from "./person/person.component";
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 const routes = [
-  {path: '', redirectTo: '/persons', pathMatch: 'full'},
-  {path: 'persons', component: PersonComponent},
-  {path: 'newPerson', component: NewPersonComponent},
-  {path: 'editPerson/:id', component: NewPersonComponent},
-  {path: 'importPersons', component: ImportPersonsComponent},
+  {path: '', loadChildren: () => import('./person/person.module').then(m => m.PersonModule)},
+  {path: 'persons', loadChildren: () => import('./person/person.module').then(m => m.PersonModule)},
+  {path: 'newPerson', loadChildren: () => import('./new-person/new-person.module').then(m => m.NewPersonModule)},
+  {path: 'editPerson/:id', loadChildren: () => import('./new-person/new-person.module').then(m => m.NewPersonModule)},
+  {path: 'editPerson/:id', loadChildren: () => import('./new-person/new-person.module').then(m => m.NewPersonModule)},
+  {path: 'importPersons', loadChildren: () => import('./import-persons/import-person.module').then(m => m.ImportPersonModule)},
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
