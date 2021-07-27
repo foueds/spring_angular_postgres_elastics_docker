@@ -36,3 +36,7 @@ Type: taskkill _F -PID XXX
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Keycload configuration
+To run keycload server --> port 8088 (to be included in docker later)
+\bin\standalone.bat 

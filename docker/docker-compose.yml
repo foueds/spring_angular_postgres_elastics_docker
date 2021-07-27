@@ -14,20 +14,21 @@ services:
     image: kibana:6.8.6
     ports:
       - "5601:5601"
-  db:
+  postgres:
     image: postgres:12.2
     ports:
       - "5432:5432"
+    restart: always
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
-      PGDATA: /tmp
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - pgvol:/var/lib/postgresql/data
     networks:
       - devops
   pgadmin:
-    image: dpage/pgadmin4
+    restart: always
+    image: dpage/pgadmin4:5.5
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
       PGADMIN_DEFAULT_PASSWORD: "admin"
@@ -38,7 +39,7 @@ services:
     networks:
       - devops
   jenkins:
-    image: jenkinsci/blueocean
+    image: jenkinsci/blueocean:1.24.8
     user: "root"
     volumes:
       - ./jenkins-data:/var/jenkins_home
@@ -46,15 +47,43 @@ services:
       - ./:/home
     ports:
       - "8085:8080"
+    restart: always
     depends_on:
-      - db
+      - postgres
     links:
-      - db
+      - postgres
+    networks:
+      - devops
+  keycloak:
+    image: quay.io/keycloak/keycloak:14.0.0
+    ports:
+      - "8180:8080"
+      - "8181:8443"
+      - "9990:9990"
+    restart: always
+    environment:
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=postgres
+      - DB_PORT=5432
+      - DB_SCHEMA=public
+      - DB_DATABASE=keycloak
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - PROXY_ADDRESS_FORWARDING=true
+    volumes:
+      - ./keycloak-data/realm-api.json:/opt/jboss/keycloak/realm-api.json
+    depends_on:
+      - postgres
     networks:
       - devops
 networks:
   devops:
     driver: bridge
+volumes:
+  pgvol:
+
 
 
 

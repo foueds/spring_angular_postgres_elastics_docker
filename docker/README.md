@@ -2,7 +2,7 @@
 ###run docker
 docker-compose up -d
 ### stop docker
-docker-compose down -v
+docker-compose down 
 
 ##see container up 
 docker ps
