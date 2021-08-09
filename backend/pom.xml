@@ -13,7 +13,7 @@
   <packaging>jar</packaging>
   <properties>
     <java.version>11</java.version>
-    <elasticsearch.version>6.8.6</elasticsearch.version>
+    <elasticsearch.version>6.8.17</elasticsearch.version>
     <main.basedir>${project.parent.basedir}</main.basedir>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
