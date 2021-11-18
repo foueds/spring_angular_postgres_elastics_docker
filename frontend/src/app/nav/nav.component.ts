@@ -21,7 +21,7 @@ export class NavComponent {
   }
 
   ontoggle() {
-    this.sidenav.toggle();
+    this.sidenav.toggle().then();
   }
 
 

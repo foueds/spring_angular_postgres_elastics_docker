@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elasticsearch:
-    image: elasticsearch:6.8.6
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2-arm64
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -12,10 +12,12 @@ services:
       - discovery.type=single-node
   kibana:
     image: kibana:6.8.6
+    platform: linux/amd64
     ports:
       - "5601:5601"
   postgres:
     image: postgres:12.2
+    platform: linux/amd64
     ports:
       - "5432:5432"
     restart: always
@@ -29,6 +31,7 @@ services:
   pgadmin:
     restart: always
     image: dpage/pgadmin4:5.5
+    platform: linux/amd64
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
       PGADMIN_DEFAULT_PASSWORD: "admin"
@@ -40,6 +43,7 @@ services:
       - devops
   jenkins:
     image: jenkinsci/blueocean:1.24.8
+    platform: linux/amd64
     user: "root"
     volumes:
       - ./jenkins-data:/var/jenkins_home
@@ -55,27 +59,18 @@ services:
     networks:
       - devops
   keycloak:
-    image: quay.io/keycloak/keycloak:14.0.0
+    image: wizzn/keycloak:14
     ports:
       - "8180:8080"
       - "8181:8443"
       - "9990:9990"
     restart: always
     environment:
-      - DB_VENDOR=POSTGRES
-      - DB_ADDR=postgres
-      - DB_PORT=5432
-      - DB_SCHEMA=public
-      - DB_DATABASE=keycloak
-      - DB_USER=admin
-      - DB_PASSWORD=admin
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
       - PROXY_ADDRESS_FORWARDING=true
     volumes:
       - ./keycloak-data/realm-api.json:/opt/jboss/keycloak/realm-api.json
-    depends_on:
-      - postgres
     networks:
       - devops
 networks:
