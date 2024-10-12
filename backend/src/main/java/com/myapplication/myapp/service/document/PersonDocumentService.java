@@ -21,4 +21,6 @@ public interface PersonDocumentService {
   Page<PersonDocument> findByFirstName(String name, Pageable pageable);
 
   void deleteById(long id);
+
+  void saveAll(List<PersonDocument> personDocuments);
 }

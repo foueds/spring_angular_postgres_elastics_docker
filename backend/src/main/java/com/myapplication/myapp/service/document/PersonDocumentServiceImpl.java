@@ -25,6 +25,10 @@ public class PersonDocumentServiceImpl implements PersonDocumentService {
     return personEsRepository.save(personDocument);
   }
 
+  public void saveAll(List<PersonDocument> personDocuments){
+    personEsRepository.saveAll(personDocuments);
+  }
+
   @Override
   public List<PersonDocument> importPersons(List<PersonDocument> personDocuments) {
     return (List<PersonDocument>) personEsRepository.saveAll(personDocuments);

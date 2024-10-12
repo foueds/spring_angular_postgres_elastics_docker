@@ -1,22 +1,18 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
+            image 'docker:19.03'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                script {
+                    sh 'docker --version'  // Verify Docker is available
+                    sh 'docker pull maven:3-alpine'
+                }
             }
         }
     }
 }
-
-

@@ -14,7 +14,7 @@ export class PersonComponent implements OnInit {
   personsList: Array<Person>;
   columnsToDisplay = ['firstName', 'lastName', 'birthDate', 'mailAddress', 'phoneNumber', 'actions'];
 
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
 
   constructor(private personService: PersonService, private router: Router) {
   }

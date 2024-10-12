@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elasticsearch:
-    image: elasticsearch:6.8.6
+    image: arm64v8/elasticsearch:7.9.3
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -10,8 +10,10 @@ services:
       - node.name=es01
       - cluster.name=es-docker-cluster
       - discovery.type=single-node
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:6.8.6
+    image: docker.elastic.co/kibana/kibana:7.9.3
     ports:
       - "5601:5601"
   postgres:
@@ -39,15 +41,18 @@ services:
     networks:
       - devops
   jenkins:
-    image: jenkinsci/blueocean:1.24.8
-    user: "root"
-    volumes:
-      - ./jenkins-data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./:/home
+    image: jenkins/jenkins:lts
+    container_name: jenkins-server
+    privileged: true
+    user: root
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
     ports:
       - "8085:8080"
-    restart: always
+      - "50000:50000"
+    volumes:
+    - jenkins_home:/var/jenkins_home  # Persist Jenkins data
+    - /var/run/docker.sock:/var/run/docker.sock  # Give Jenkins access to Docker
     depends_on:
       - postgres
     links:
@@ -84,7 +89,9 @@ networks:
 volumes:
   pgvol:
   data01:
-
+  es_data: # Elasticsearch data will be stored in this named volume
+      driver: local
+  jenkins_home:
 
 
 

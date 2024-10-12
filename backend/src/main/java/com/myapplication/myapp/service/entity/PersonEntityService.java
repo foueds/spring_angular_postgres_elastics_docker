@@ -13,4 +13,7 @@ public interface PersonEntityService {
   List<PersonEntity> importPersons(List<PersonEntity> personEntities);
 
   void deleteById(long id);
+
+  List<PersonEntity> findAll();
+
 }

@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent {
-  @ViewChild(MatSidenav) sidenav: MatSidenav;
+  @ViewChild(MatSidenav, { static: false }) sidenav: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
