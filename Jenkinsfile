@@ -5,12 +5,16 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
         }
     }
-stages {
+    stages {
         stage('Build') {
             steps {
                 script {
-                    // Check if Docker is running in Jenkins container
-                    sh 'docker --version'
+                    // Install Docker inside the container
+                    sh '''
+                    apk update
+                    apk add docker-cli
+                    docker --version
+                    '''
 
                     // Run the build inside a Docker container
                     docker.image('maven:3.6.3-jdk-8').inside {
