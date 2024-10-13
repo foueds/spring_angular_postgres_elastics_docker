@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3.8.5-alpine'  // Use a more recent Alpine-based Maven image
+            image 'maven:3.8.7-alpine'  // Use the correct and available Maven Alpine image
             args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
         }
     }
