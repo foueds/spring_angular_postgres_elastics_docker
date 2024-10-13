@@ -6,22 +6,10 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
-            steps {
-                script {
-                    // Install Docker CLI inside the container
-                    sh '''
-                    apk update
-                    apk add docker-cli
-                    docker --version
-                    '''
-
-                    // Run the build inside a Docker container
-                    docker.image('maven:3.6.3-jdk-8').inside {
-                        sh 'mvn clean install -DskipTests'
-                    }
+            stage('Build') {
+                steps {
+                    sh 'mvn clean install -DskipTests'
                 }
             }
-        }
     }
 }
