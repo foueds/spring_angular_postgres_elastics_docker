@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3-alpine'
+            image 'maven:3.8.5-alpine'  // Use a more recent Alpine-based Maven image
             args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
         }
     }
@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Install Docker inside the container
+                    // Install Docker CLI inside the container
                     sh '''
                     apk update
                     apk add docker-cli
