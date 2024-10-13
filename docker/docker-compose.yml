@@ -43,13 +43,18 @@ services:
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins-server
-    privileged: true
+    privileged: true # This allows Docker to run inside the Jenkins container.
     user: root
     environment:
       JENKINS_OPTS: --prefix=/jenkins
     ports:
       - "8085:8080"
       - "50000:50000"
+    entrypoint: ""
+    command: >
+      /bin/bash -c "apt-get update &&
+      apt-get install -y docker.io &&
+      /usr/local/bin/jenkins.sh"
     volumes:
     - jenkins_home:/var/jenkins_home  # Persist Jenkins data
     - /var/run/docker.sock:/var/run/docker.sock  # Give Jenkins access to Docker

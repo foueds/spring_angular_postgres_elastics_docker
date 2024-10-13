@@ -5,10 +5,18 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
         }
     }
-    stages {
+stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                script {
+                    // Check if Docker is running in Jenkins container
+                    sh 'docker --version'
+
+                    // Run the build inside a Docker container
+                    docker.image('maven:3.6.3-jdk-8').inside {
+                        sh 'mvn clean install -DskipTests'
+                    }
+                }
             }
         }
     }
